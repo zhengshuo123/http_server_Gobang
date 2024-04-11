@@ -64,7 +64,7 @@ void process_rq(char *rq,int fd)
     }
     strcpy(arg,"./");
     if(sscanf(rq,"%s /%s",cmd,arg+2)!=2)
-        return;
+        exit(0);
     printf("%s,%s\n",cmd,arg);
     if(strcmp(cmd,"GET") != 0)
         cannot_do(fd);
