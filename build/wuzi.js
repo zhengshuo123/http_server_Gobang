@@ -1,6 +1,7 @@
 /*状态事件*/
 
 var currentColor = 'black'; // 默认为黑色先行
+var pressedCell = null;
 
 function status1(){
     currentColor = 'black';
@@ -115,11 +116,21 @@ var judge = function(color, callback) {
 };
 
 window.onload = function() {
-   // 设置初始棋手图片为黑棋
-   document.getElementById('qizi').src = "black.png";
-
-   document.getElementsByTagName('table')[0].onclick = function(ev) {
-       xia.call(ev.target); // 使用 ev.target 替换 ev.srcElement
-   };
-}
-
+    // 设置初始棋手图片为黑棋
+    document.getElementById('qizi').src = "black.png";
+ 
+    var tds = document.getElementsByTagName('td');
+    for (var i = 0; i < tds.length; i++) {
+        tds[i].onmousedown = function(ev) {
+            // 记录鼠标按下的单元格
+            pressedCell = ev.target;
+        };
+        tds[i].onmouseup = function(ev) {
+            // 检查是否是同一个单元格触发的 mouseup 事件
+            if (pressedCell === ev.target) {
+                xia.call(ev.target);
+            }
+            pressedCell = null; // 重置
+        };
+    }
+ };
