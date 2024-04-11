@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/root/learn_linux_system_programming/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/server.dir/server.c.o -c /root/learn_linux_system_programming/server.c",
+  "file": "/root/learn_linux_system_programming/server.c"
+}
+]
