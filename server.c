@@ -72,6 +72,7 @@ void process_rq(char *rq,int fd)
         do_404(arg,fd);
     else
         do_cat(arg,fd);
+    exit(0);
 }
 
 void header(FILE *fp, char *content_type)
