@@ -166,8 +166,21 @@ void do_cat(char *f,int fd)
         header(fpsock,content);
         fprintf(fpsock, "Content-Length: %ld\r\n", file_size);
         fprintf(fpsock,"\r\n");
-        while((c = getc(fpfile)) != EOF)
-            putc(c,fpsock);
+    while (1) {
+        c = getc(fpfile);
+        if (c == EOF) {
+            if (feof(fpfile)) {
+                // 到达文件末尾
+                break;
+            }
+            if (ferror(fpfile)) {
+                // 发生读取错误
+                perror("Error reading file");
+                break;
+            }
+        }
+        putc(c, fpsock);
+    }
         fclose(fpfile);
         fclose(fpsock);
     }
